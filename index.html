@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSimulador Plus | Projeto Acadêmico</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Adicionando Chart.js para os gráficos -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🌍 EcoSimulador Plus</h1>
+        <h2>Projeto Acadêmico com Testes Automatizados</h2>
+
+        <div class="input-group">
+            <label for="agua">Água consumida (litros/mês):</label>
+            <input type="number" id="agua" placeholder="Ex: 10000" min="0">
+        </div>
+
+        <div class="input-group">
+            <label for="energia">Energia consumida (kWh/mês):</label>
+            <input type="number" id="energia" placeholder="Ex: 300" min="0">
+        </div>
+
+        <div class="input-group">
+            <label for="lixo">Lixo gerado (kg/mês):</label>
+            <input type="number" id="lixo" placeholder="Ex: 30" min="0">
+        </div>
+
+        <div class="input-group">
+            <label for="pessoas">Número de pessoas na casa:</label>
+            <input type="number" id="pessoas" placeholder="Ex: 4" min="1" value="1">
+        </div>
+
+        <div class="btn-group">
+            <button id="btnCalcular" onclick="calcularImpacto()">Calcular Impacto</button>
+            <button id="btnSalvar" onclick="salvarDados()" disabled>Salvar Dados</button>
+            <button id="btnLimpar" onclick="limparDados()">Limpar Tudo</button>
+        </div>
+
+        <div id="resultado" style="display: none;">
+            <h2>📊 Resultado do Simulador</h2>
+            <canvas id="grafico" height="200"></canvas>
+            <div id="dicas" class="dicas-container"></div>
+        </div>
+
+        <h2>🧪 Área de Testes Automatizados</h2>
+
+        <div class="btn-group">
+            <button class="test-btn" onclick="executarTesteUnitario()">Rodar Teste Unitário</button>
+            <button class="test-btn" onclick="executarTesteComponente()">Rodar Teste de Componente</button>
+            <button class="test-btn" onclick="executarTodosTestes()">Rodar Todos os Testes</button>
+        </div>
+
+        <div id="testResults" class="test-results">
+            <h3>📝 Resultados dos Testes</h3>
+            <div id="unitTestResult" class="test-result"></div>
+            <div id="componentTestResult" class="test-result"></div>
+        </div>
+    </div>
+
+    <script>
+        // ===============================
+        // Configurações e Constantes
+        // ===============================
+        const CONFIG = {
+            MEDIA_BRASIL_POR_PESSOA: 230, // kg CO₂/pessoa/mês
+            FATORES: {
+                KWH: 0.82,          // kg CO₂ por kWh
+                LITRO_AGUA: 0.0005, // kg CO₂ por litro de água
+                KG_LIXO: 1.8        // kg CO₂ por kg de lixo
+            },
+            LIMITES: {
+                AGUA: 10000,  // litros/mês
+                ENERGIA: 300, // kWh/mês
+                LIXO: 30      // kg/mês
+            }
+        };
+
+        // Variável global para o gráfico
+        let grafico = null;
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function () {
+            $('resultado').style.display = 'none';
+            $('btnSalvar').disabled = true;
+        });
+    
+    </script>
+     <script src="src/Funtion.js"></script>
+  <script src="src/rodarTestes.js"></script>
+  <script src="tests/unitario.test.js"></script>
+  <script src="tests/component.test.js"></script>
+
+</body>
+</html>
